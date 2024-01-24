@@ -264,7 +264,14 @@ export default function Home() {
       const result = writeForge({
         args: [tokenIdRequest],
       });
+
       setShowSpy(true);
+      setIsError(false); // Reset error state on successful execution
+      setForgeTransactionId(""); // Reset transaction ID
+      setRecentAction("forge"); // Update recent action
+      setForgedTokenId(tokenIdRequest);
+      setShowBanner(true);
+      setBannerText("waiting for transaction confirmation");
 
       // Check if the contract call was successful
       //@ts-ignore
@@ -278,9 +285,9 @@ export default function Home() {
       }
     } catch (error) {
       // Handle other errors (e.g., network errors) here
-      setIsError(true); // Set error state on failure
-      setBannerText(`Error: Insufficient tokens to forge ${tokenIdRequest}, please check requirements.`);
-      setShowBanner(true);
+      // setIsError(true); // Set error state on failure
+      // setBannerText(`Error: Insufficient tokens to forge ${tokenIdRequest}, please check requirements.`);
+      // setShowBanner(true);
     }
   };
 
